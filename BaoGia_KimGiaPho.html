@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Báo Giá Dịch Vụ – Kim Gia Phố</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0D1B2A;
+    --gold:   #B8922A;
+    --gold-l: #D4AF5A;
+    --cream:  #F8F4EE;
+    --stone:  #E8E0D0;
+    --slate:  #4A5568;
+    --white:  #FFFFFF;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #EDE8DF;
+    color: var(--navy);
+    min-height: 100vh;
+    padding: 40px 20px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 8px 48px rgba(13,27,42,.18);
+  }
+
+  /* ── TOP STRIP ── */
+  .top-strip {
+    height: 6px;
+    background: linear-gradient(90deg, var(--navy) 0%, var(--gold) 55%, var(--gold-l) 100%);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    padding: 40px 48px 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .header-brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--gold-l);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .header-brand h2 span { color: var(--gold-l); }
+
+  .header-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .header-meta p {
+    font-size: 12px;
+    color: #8DA4B8;
+    line-height: 1.8;
+  }
+
+  /* ── GOLD RULE ── */
+  .gold-rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-l) 100%);
+  }
+
+  /* ── HERO BAND ── */
+  .hero {
+    background: var(--cream);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--stone);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: .5px;
+  }
+  .hero-title small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .badge {
+    background: var(--navy);
+    color: var(--gold-l);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* ── BODY CONTENT ── */
+  .body { padding: 40px 48px; }
+
+  /* ── INFO CARDS ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--stone);
+    border: 1px solid var(--stone);
+    margin-bottom: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .info-card {
+    background: var(--cream);
+    padding: 18px 20px;
+  }
+  .info-card label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .info-card p {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .section-title h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: .3px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--stone);
+  }
+
+  /* ── SERVICE ITEMS ── */
+  .service-item {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 0 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--stone);
+    align-items: start;
+  }
+  .service-item:last-child { border-bottom: none; }
+
+  .svc-index {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold-l);
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .svc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .svc-desc {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.75;
+  }
+  .svc-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid var(--stone);
+    color: var(--slate);
+    background: var(--cream);
+  }
+
+  .svc-price-col {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .svc-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .svc-price small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #A0AEC0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ── TOTAL ── */
+  .total-bar {
+    background: var(--navy);
+    margin: 0 -48px;
+    padding: 22px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .total-bar .total-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--gold-l);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .total-bar .total-label span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    color: #6B8CA6;
+    margin-bottom: 3px;
+  }
+  .total-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold-l);
+  }
+  .total-amount small {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  /* ── NOTES ── */
+  .notes { margin-top: 36px; }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .note-item {
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    font-size: 12.5px;
+    color: var(--slate);
+    line-height: 1.65;
+    border-radius: 0 3px 3px 0;
+  }
+  .note-item strong {
+    display: block;
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  /* ── SIGNATURE ── */
+  .sig-section {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .sig-box {
+    border: 1px solid var(--stone);
+    border-radius: 4px;
+    padding: 24px;
+    text-align: center;
+    background: var(--cream);
+  }
+  .sig-box .sig-role {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .sig-box .sig-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 52px;
+  }
+  .sig-box .sig-line {
+    border-top: 1px solid var(--slate);
+    padding-top: 8px;
+    font-size: 11px;
+    color: #A0AEC0;
+    letter-spacing: 1px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .footer p { font-size: 11px; color: #4A6880; line-height: 1.6; }
+  .footer .footer-thank {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--gold-l);
+    text-align: right;
+    flex-shrink: 0;
+    font-style: italic;
+  }
+
+  /* ── BOTTOM STRIP ── */
+  .bottom-strip {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-l) 100%);
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-strip"></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-brand">
+      <h1>Harmony Agency</h1>
+      <h2>Thiết Kế &amp; <span>Truyền Thông</span></h2>
+    </div>
+    <div class="header-meta">
+      <p>Emma Nguyen<br/>0899 856 486<br/>TP. Hồ Chí Minh</p>
+    </div>
+  </div>
+  <div class="gold-rule"></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-title">
+      <small>Đề xuất dịch vụ</small>
+      Báo Giá Thiết Kế Bộ Nhận Diện Thương Hiệu
+    </div>
+    <div class="badge">Bất Động Sản Nhà Phố</div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- INFO CARDS -->
+    <div class="info-grid">
+      <div class="info-card">
+        <label>Kính gửi</label>
+        <p>Anh Nguyễn Hồng Quân<br/>Kim Gia Phố</p>
+      </div>
+      <div class="info-card">
+        <label>Ngày báo giá</label>
+        <p>06 / 06 / 2026</p>
+      </div>
+      <div class="info-card">
+        <label>Hiệu lực</label>
+        <p>30 ngày kể từ<br/>ngày phát hành</p>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="section-title">
+      <h3>Hạng Mục Dịch Vụ</h3>
+    </div>
+
+    <!-- Service 1 -->
+    <div class="service-item">
+      <div class="svc-index">1</div>
+      <div class="svc-body">
+        <div class="svc-name">Thiết Kế Logo &amp; Brand Guideline</div>
+        <div class="svc-desc">
+          Thiết kế tối đa <strong>03 phương án logo</strong> để Anh lựa chọn 01 phương án phù hợp nhất,
+          sau đó tinh chỉnh và hoàn thiện. Bộ Brand Guideline bao gồm bảng màu thương hiệu,
+          hệ thống font chữ và quy chuẩn sử dụng nhận diện cơ bản — đảm bảo đồng bộ
+          trên mọi vật phẩm truyền thông của <em>Kim Gia Phố</em>.
+        </div>
+        <div class="svc-tags">
+          <span class="tag">03 phương án logo</span>
+          <span class="tag">Bảng màu thương hiệu</span>
+          <span class="tag">Hệ thống font chữ</span>
+          <span class="tag">Quy chuẩn nhận diện</span>
+        </div>
+      </div>
+      <div class="svc-price-col">
+        <div class="svc-price">10.000.000<small>VNĐ</small></div>
+      </div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-item">
+      <div class="svc-index">2</div>
+      <div class="svc-body">
+        <div class="svc-name">Thiết Kế Namecard</div>
+        <div class="svc-desc">
+          Thiết kế namecard <strong>đồng bộ hoàn toàn</strong> với bộ nhận diện thương hiệu —
+          chuyên nghiệp, sang trọng và sẵn sàng bàn giao file gốc phục vụ in ấn.
+        </div>
+        <div class="svc-tags">
+          <span class="tag">File AI / PDF sẵn in ấn</span>
+          <span class="tag">Đồng bộ bộ nhận diện</span>
+        </div>
+      </div>
+      <div class="svc-price-col">
+        <div class="svc-price">500.000<small>VNĐ</small></div>
+      </div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-item">
+      <div class="svc-index">3</div>
+      <div class="svc-body">
+        <div class="svc-name">Set Up Fanpage &amp; Nội Dung Khởi Đầu</div>
+        <div class="svc-desc">
+          Thiết kế <strong>cover fanpage</strong> chuyên nghiệp, xây dựng nội dung
+          và set up <strong>20 bài viết</strong> khởi đầu — giúp fanpage Kim Gia Phố
+          có diện mạo bài bản và sẵn sàng tiếp cận khách hàng ngay từ ngày đầu ra mắt.
+        </div>
+        <div class="svc-tags">
+          <span class="tag">Cover fanpage</span>
+          <span class="tag">20 bài viết nội dung</span>
+          <span class="tag">Set up &amp; xuất bản</span>
+        </div>
+      </div>
+      <div class="svc-price-col">
+        <div class="svc-price">4.500.000<small>VNĐ</small></div>
+      </div>
+    </div>
+
+    <!-- TOTAL -->
+    <div class="total-bar">
+      <div class="total-label">
+        <span>Chi phí đầu tư</span>
+        Tổng Cộng
+      </div>
+      <div class="total-amount">15.000.000 <small>VNĐ</small></div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes">
+      <div class="section-title" style="margin-top:36px;">
+        <h3>Điều Khoản &amp; Lưu Ý</h3>
+      </div>
+      <div class="notes-grid">
+        <div class="note-item">
+          <strong>Thanh toán</strong>
+          50% khi ký hợp đồng — 50% khi nghiệm thu bàn giao.
+        </div>
+        <div class="note-item">
+          <strong>Thời gian thực hiện</strong>
+          5 – 7 ngày làm việc kể từ ngày chốt ý tưởng.
+        </div>
+        <div class="note-item">
+          <strong>Chỉnh sửa</strong>
+          Tối đa 03 lần chỉnh sửa mỗi hạng mục dịch vụ.
+        </div>
+        <div class="note-item">
+          <strong>Chi phí phát sinh</strong>
+          Giá trên chưa bao gồm phí in ấn &amp; các chi phí phát sinh khác (nếu có).
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="sig-section">
+      <div class="sig-box">
+        <div class="sig-role">Đại diện khách hàng</div>
+        <div class="sig-name">Anh Nguyễn Hồng Quân – Kim Gia Phố</div>
+        <div class="sig-line">Ký &amp; ghi rõ họ tên</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-role">Đại diện công ty</div>
+        <div class="sig-name">Harmony Agency – Emma Nguyen</div>
+        <div class="sig-line">Ký &amp; ghi rõ họ tên</div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      Cảm ơn Anh Quân đã tin tưởng và quan tâm đến dịch vụ.<br/>
+      Harmony Agency cam kết mang đến giải pháp sáng tạo xứng tầm thương hiệu <em>Kim Gia Phố</em>.
+    </p>
+    <div class="footer-thank">"Kiến tạo thương hiệu,<br/>Nâng tầm giá trị."</div>
+  </div>
+  <div class="bottom-strip"></div>
+
+</div>
+</body>
+</html>
